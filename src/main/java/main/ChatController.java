@@ -10,6 +10,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -98,12 +99,14 @@ public class ChatController {
     }
 
     @GetMapping(path = "/api/users")
-    public List<String> getUsers() {
-//        Map<String, Iterable<User>> response = new HashMap<>();
-//        Iterable<User> users = userRepository.findAll();
-//        response.put("users", users);
-//        return response;
-        return userRepository.findAll().stream().map(User::getName).collect(Collectors.toList());
+    public Map<String, Iterable<User> > getUsers() {
+        Map<String, Iterable<User>> response = new HashMap<>();
+        Iterable<User> users = userRepository.findAll();
+        response.put("users", users);
+        return response;
+//        List<String> list = new ArrayList<>();
+//        userRepository.findAll().forEach(o -> list.add(o.getName()));
+//        return list;
     }
 
 
